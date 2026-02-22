@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chad S. Hewitt, Ph.D Website</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-alt: #12172a;
+      --accent: #4fd1c5;
+      --accent-soft: rgba(79, 209, 197, 0.1);
+      --text: #f7fafc;
+      --muted: #a0aec0;
+      --card: #1a2238;
+      --border: #2d3748;
+      --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font);
+      background: radial-gradient(circle at top, #202b46 0, #050712 45%, #02030a 100%);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 0;
+      margin: 0;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(to right, rgba(11,16,32,0.96), rgba(11,16,32,0.9));
+      border-bottom: 1px solid rgba(148,163,184,0.25);
+    }
+
+    .nav-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      position: relative;
+      padding-bottom: 0.15rem;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.2s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 3.5rem;
+    }
+
+    section {
+      padding: 2.5rem 0;
+      border-bottom: 1px solid rgba(148,163,184,0.2);
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    h1, h2, h3 {
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+  
+
+    /* Hero / About */
+    .hero {
+      display: grid;
+      gap: 2rem;
+      align-items: center;
+      padding-top: 3rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 4vw, 2.8rem);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-highlight {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(148,163,184,0.12);
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .hero-highlight span {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .hero-summary {
+      font-size: 0.98rem;
+      color: #e2e8f0;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-meta {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      border-radius: 999px;
+      font-size: 0.85rem;
+      padding: 0.55rem 1.1rem;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .btn-primary {
+      background: radial-gradient(circle at top left, #4fd1c5 0, #2c7a7b 40%, #234e52 100%);
+      border-color: rgba(15, 23, 42, 0.8);
+      color: #0b1120;
+      font-weight: 500;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.85);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.05);
+    }
+
+    .btn-ghost {
+      background: rgba(15, 23, 42, 0.8);
+      color: var(--muted);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .hero-links {
+      font-size: 0.85rem;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .hero-pane {
+      background: radial-gradient(circle at top, rgba(79,209,197,0.1) 0, rgba(15,23,42,1) 52%);
+      border-radius: 1.5rem;
+      border: 1px solid rgba(148,163,184,0.45);
+      padding: 1.5rem 1.4rem;
+      box-shadow: 0 18px 45px rgba(15,23,42,0.9);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-pane-tagline {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: rgba(226,232,240,0.9);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-pane-keyline {
+      font-size: 0.9rem;
+      color: #f9fafb;
+      margin-bottom: 1rem;
+    }
+
+    .hero-pane-metadata {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+      font-size: 0.8rem;
+    }
+
+    .hero-pane-pill {
+      padding: 0.45rem 0.6rem;
+      border-radius: 0.9rem;
+      border: 1px solid rgba(148,163,184,0.45);
+      background: rgba(15,23,42,0.92);
+      color: rgba(226,232,240,0.94);
+    }
+
+    .hero-pane-pill span {
+      display: block;
+      font-size: 0.72rem;
+      color: #94a3b8;
+      margin-bottom: 0.15rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-pane-badge {
+      position: absolute;
+      right: 1.4rem;
+      bottom: 1.3rem;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: rgba(148,163,184,0.95);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: rgba(15,23,42,0.92);
+      padding: 0.35rem 0.65rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.5);
+    }
+
+    .hero-pane-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #4fd1c5;
+      box-shadow: 0 0 0 3px rgba(79,209,197,0.3);
+    }
+
+    /* Two-column layouts */
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.3fr);
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .section-lead {
+      font-size: 0.96rem;
+      color: #e2e8f0;
+      margin-bottom: 1rem;
+    }
+
+    .section-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* Cards and lists */
+    .card {
+      background: linear-gradient(135deg, rgba(26,32,44,0.98), rgba(15,23,42,1));
+      border-radius: 1rem;
+      border: 1px solid rgba(148,163,184,0.35);
+      padding: 1.3rem 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .card-title {
+      font-size: 0.98rem;
+      font-weight: 500;
+    }
+
+    .card-meta {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+
+    .card-subtitle {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.75rem;
+      font-size: 0.78rem;
+    }
+
+    .tag {
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(79,209,197,0.08);
+      color: #a5f3e9;
+      border: 1px solid rgba(79,209,197,0.35);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      border-radius: 999px;
+      padding: 0.25rem 0.55rem;
+      font-size: 0.75rem;
+      border: 1px solid rgba(148,163,184,0.4);
+      color: var(--muted);
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .bullet {
+      display: flex;
+      gap: 0.6rem;
+      font-size: 0.87rem;
+      color: #e2e8f0;
+      margin-bottom: 0.5rem;
+    }
+
+    .bullet::before {
+      content: "•";
+      color: var(--accent);
+      margin-top: 0.05rem;
+    }
+
+    /* Achievements timeline */
+    .timeline {
+      border-left: 1px solid rgba(148,163,184,0.3);
+      margin-left: 0.5rem;
+      padding-left: 1.25rem;
+    }
+
+    .timeline-item {
+      margin-bottom: 1.25rem;
+    }
+
+    .timeline-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 0.15rem;
+    }
+
+    .timeline-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-bottom: 0.15rem;
+    }
+
+    .timeline-meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+    }
+
+    /* Projects grid */
+    .projects-grid {
+      display: grid;
+      
+      gap: 1.25rem;
+    }
+
+    .project-card {
+      background: radial-gradient(circle at top left, rgba(79,209,197,0.16), rgba(15,23,42,1) 58%);
+      border-radius: 1rem;
+      border: 1px solid rgba(148,163,184,0.45);
+      padding: 1.25rem 1.15rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .project-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
+
+    .project-title {
+      font-size: 0.98rem;
+      font-weight: 500;
+    }
+
+    .project-meta {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+
+    .project-desc {
+      font-size: 0.86rem;
+      color: #e2e8f0;
+    }
+
+    .project-impact {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .project-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.4rem;
+      gap: 0.75rem;
+    }
+
+    .project-link {
+      font-size: 0.8rem;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    /* Skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 0.9rem;
+    }
+
+    .skills-group-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 0.45rem;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      font-size: 0.8rem;
+    }
+
+    .skill-pill {
+      padding: 0.22rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.55);
+      color: #e2e8f0;
+    }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.4fr);
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .contact-card {
+      background: rgba(15,23,42,0.92);
+      border-radius: 1rem;
+      border: 1px solid rgba(148,163,184,0.4);
+      padding: 1.3rem 1.2rem;
+      font-size: 0.88rem;
+      color: #e2e8f0;
+    }
+
+    .contact-row {
+      font-size: 0.86rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    footer {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 2.25rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid rgba(148,163,184,0.25);
+    }
+    .circle-img {
+        width: 200px;
+        height: 200px;
+        min-width: 200px;
+        min-height: 200px;
+        max-width: 200px;
+        max-height: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0; /* prevents shrinking in flex containers */
+      }
+    @media (max-width: 800px) {
+      .hero,
+      .two-col,
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero {
+        padding-top: 1.5rem;
+      }
+      header {
+        position: static;
+      }
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+      }
+      .nav-links {
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+      footer {
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+    }
+    
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav-inner">
+   
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#Past Positions">Past Positions</a>
+        <a href="#Education">Education</a>
+        <a href="#publications">Publications</a>
+        <a href="#achievements">Achievements</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+        <a href="#Resume/CV">Resume/CV</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ABOUT / HERO -->
+    <section id="about">
+      <div class="hero">
+        <div>
+          <img src="IMG_5670.JPG" alt="Profile Photo" class="circle-img">
+          <h1 class="hero-title"> Chad S. Hewitt, Ph.D</h1>
+          <h3 class="hero-subtitle"> Scientist II - DEL and Protein Sciences and Project Lead</h3>
+          <h3 class="hero-subtitle">Nurix Therapeutics - San Fransicso, California</h3>
+          <p class="hero-subtitle"> 
+            At Nurix Therapeutics, I leverage an integrated DEL-AI platform that combines DNA-encoded library screening with artificial intelligence foundation models to identify high-affinity ligands for disease-driving targets and E3 ligases. These binders are assembled into proteolysis-targeting chimeras (PROTACs) to selectively degrade pathogenic proteins across oncology and inflammation and immunology (I&I) indications.
+          </p>
+          <div class="hero-links">
+            <span>San Francisco, CA</span>
+            <span>·</span>
+            <a href="mailto:hewi2426@gmail.com">hewi2426@gmail.com</a>
+            <span>·</span>
+            <a href="https://www.linkedin.com/in/chad-hewitt-58917a145/" target="_blank" rel="noreferrer">LinkedIn</a>
+          </div>
+        </div>
+
+
+      </div>
+    </section>
+
+ <!-- EDUCATION-->
+ <section id="Education">
+  <h2>Education</h2>
+  <div>
+    <div>
+          Ph.D. , Medicinal Chemistry and Molecular Pharmacology (MCMP) &nbsp;&nbsp;| &nbsp;&nbsp;August 2016 - September 2021  <ul></ul> 
+          Purdue University - West Lafayette, Indiana     <ul></ul>
+          Thesis: <a href="https://www.proquest.com/openview/ad6af8e639245025a54b84c5259adb19/1?pq-origsite=gscholar&cbl=18750&diss=y" target="_blank" rel="noreferrer">Development of Ubiquitin Variants with Selectivity for the Ubiquitin C-Terminal Hydrolase Subfamily of Deubiquitinases  </a> </p> <ul></ul> 
+          <p> &nbsp;</p>
+           BS, Biochemistry Major &nbsp;&nbsp;| &nbsp;&nbsp;September 2012 - May 2016<ul></ul>              
+            University of St. Thomas - St. Paul, Minnesota   <ul></ul>
+    </div>
+  </div>
+</section>
+
+    <!-- PAST POSITIONS-->
+    <section id="Past Positions">
+      <h2>Past Positions</h2>
+
+      <div>
+        <div>
+          <p class="section-lead">
+            Scientist I - DEL Screening Scientist   &nbsp;&nbsp; | &nbsp;&nbsp;September 2021-January 2024         </p>
+          <p class="section-lead">
+            Nurix Therapuetics - San Francisco, California        </p>
+            <ul>
+              <li class="bullet">
+                Generated and curated DEL screening datasets across diverse target classes, contributing to portfolio-scale learning on experimental variability, bias, and signal stability.              </li>
+              <li class="bullet">
+                Utilized UniProt and the PDB to compile protein target reviews, integrating sequence, structural, and functional annotations.              </li>
+              <li class="bullet">
+                Supported development of cross-program experimental standards to improve data comparability and reuse.  </li>
+            </ul>
+            <p>&nbsp;  </p>
+            <p class="section-lead">
+              Graduate Research Assistant &nbsp;&nbsp;| &nbsp;&nbsp;August 2016 - October 2021	        </p>
+            <p class="section-lead">
+              Purdue University - West Lafayette, Indiana        </p>
+              <ul>
+                <li class="bullet">
+                  Authored 13 peer-reviewed publications, emphasizing reproducible protein engineering, biochemical characterization, and structure–function relationships.                <li class="bullet">
+                  Led a multi-national experimental collaboration, coordinating assay design, data integration, and interpretation across laboratories.                <li class="bullet">
+                  Mentored junior researchers, developing scalable experimental workflows and documentation practices.              </ul>
+        </div>
+      </div>
+    </section>
+
+   
+
+    <!-- PUBLICATIONS -->
+    <section id="publications">
+      <h2>Publications</h2>
+      <p class="section-lead">
+        Peer-reviewed publications = 13   </p>
+      <p class="section-lead">
+         h-index = 10&nbsp; &nbsp;  &nbsp; &nbsp;   Citation count =    410</p>
+        <div>
+          <p class="section-lead">
+            Select publications, full list available at my  <a href="https://scholar.google.com/citations?user=F17Msy8AAAAJ&hl=en" target="_blank" rel="noreferrer">Google Scholar profile</a>
+          </p>
+          <p class="section-note">
+  
+        </div>
+
+        <div>
+          <!-- Paper template 1 -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                Structure–Activity Relationship Studies of Acetazolamide-Based Carbonic Anhydrase Inhibitors with Activity against Neisseria gonorrhoeae
+              </div>
+              <div class="card-meta">
+                ACS Infectious Diseases · 2021
+              </div>
+            </div>
+            <p class="card-subtitle">
+            Chad S. Hewitt, Nader S. Abutaleb, Amed EM Elhassanny, Alessio Nocentini, Xufeng Cao, Devon P. Amos, Molly S. Youse, Katrina J. Holly, Anil Kumar Marapaka, Weiwei An. Daniel P. Flaherty.
+            </p>
+            <p class="project-impact">
+              This ultimately led to molecules 20 and 23, which displayed minimum inhibitory concentration values as low as 0.25 μg/mL equating to an 8- to 16-fold improvement in antigonococcal activity compared to acetazolamide.            </p>
+            <div class="tag-row">
+              <span class="tag">Structure Activity Relationship (SAR)</span>
+              <span class="tag">Drug Repurposing</span>
+              <span class="tag">Protein Purification</span>
+              <span class="tag">Fluorescence Polarization</span>
+              
+            </div>
+            <p style="margin-top:0.6rem;font-size:0.8rem;">
+              <a href="https://scholar.google.com/citations?user=F17Msy8AAAAJ&hl=en" target="_blank" rel="noreferrer">
+                View on Google Scholar
+              </a>
+            </p>
+          </div>
+
+          <!-- Paper template 2 -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                Development of Ubiquitin Variants with Selectivity for Ubiquitin C-Terminal Hydrolase Deubiquitinases
+              </div>
+              <div class="card-meta">
+                Biochemistry · 2020
+              </div>
+            </div>
+            <p class="card-subtitle">
+              Chad S. Hewitt, Aaron D. Krabill, Chittaranjan Das, Daniel P. Flaherty
+            </p>
+            <p class="project-impact">
+              This paper describes a computational design approach to investigate ubiquitin variants that lend selectivity, both binding and inhibition, to UCHL1 over the close structural homologue UCHL3 and other deubiquitiating enzymes.          </p>
+            <div class="tag-row">
+              <span class="tag">Protein Purification</span>
+              <span class="tag">kinact/Ki assays</span>
+              <span class="tag">Molecular Dynamic Simulations</span>
+            </div>
+          </div>
+
+          <!-- Paper template 3 -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">
+                Rational development and characterization of a ubiquitin variant with selectivity for ubiquitin C-terminal hydrolase L3
+              </div>
+              <div class="card-meta">
+                Biomolecules· 2022
+              </div>
+            </div>
+            <p class="card-subtitle">
+              Chad S Hewitt, Chittaranjan Das, Daniel P Flaherty
+            </p>
+            <p class="project-impact">
+              Our group has carried out the rational design of ubiquitin-variant activity-based probes with selectivity for UCHL3 over the closely related UCHL1 and other DUBs. The approach successfully produced a triple-mutant ubiquitin variant activity-based probe, UbVQ40V/T66K/V70F-PRG, that was ultimately 20,000-fold more selective for UCHL3 over UCHL1 when assessed by rate of inactivation assays. This same variant was shown to selectively form covalent adducts with UCHL3 in MDA-MB-231 breast cancer cells and no reactivity toward other DUBs expressed.            </p>
+            <div class="tag-row">
+              <span class="tag">Protein Purification</span>
+              <span class="tag">Western Blot</span>
+              <span class="tag">Activity Based Probe</span>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2>Contact & next steps</h2>
+
+      <div class="contact-grid">
+        <div>
+          <p class="section-lead">
+Please reach out if you want to chat!          </p>
+          <p class="section-note">
+          </p>
+      
+
+        <div class="contact-card">
+          <div class="contact-row">
+            <div class="contact-label">Email</div>
+            <a href="mailto:hewi2426@gmail.com">hewi2426@gmail.com</a>
+          </div>
+          <div class="contact-row">
+            <div class="contact-label">LinkedIn</div>
+            <a href="https://www.linkedin.com/in/chad-hewitt-58917a145/" target="_blank" rel="noreferrer">https://www.linkedin.com/in/chad-hewitt-58917a145/</a>
+          </div>
+          <div class="contact-row">
+            <div class="contact-label">Location</div>
+            <span>San Francisco, CA</span>
+          </div>
+          <div class="contact-row">
+            
+              
+            
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  </footer>
+</body>
+</html>
